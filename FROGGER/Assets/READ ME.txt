@@ -1,0 +1,26 @@
+--FROGGER--
+
+player has to tap to move, 
+if you reach the 2 gaps on the top of screen twice you win, 
+player has 3 life in total
+player will die to cars,water,walls near finish area.
+
+in total there are 5 scripts:
+	*one to spawn random array of objects
+	*one for moving cars 
+		//which i disabled towards the end in the prefab
+	*one for moving wood and to do the turtle thing
+	*one for the player(it checks for collisions and resets player if he hits car/water/the green area near finish)
+	*one game manager to manage Ui elements and to timescale 0 and calculates the timer and life for player. 
+
+technically the whole game is running on 4 of the above scripts.
+
+*the car and wood scripts are independent of anything and they use fixed update for movement.
+*the player checks for collisions and trigger colisions and uses only fixed update for movement.
+*the game manager uses update to time check and check for conditions like win check etc.
+
+*used the new input system, so that player could used wsad or up,down,left,right arrows for movement.
+
+______________________________________________________________________________________________________________________________________________________
+******************************************************************************************************************************************************
+It was difficult to reach left side finish area so i didnt add the mechanism of the blocking of finish area when the player reaches it. 
