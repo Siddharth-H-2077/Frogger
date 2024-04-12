@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         input.player.Movement.canceled -= ctx => onCancelMovement(ctx.ReadValue<Vector2>());
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Cars")
         {
@@ -69,13 +69,13 @@ public class Player : MonoBehaviour
         else if(dead==false&&other.gameObject.tag=="Finish")
         {
             reached = true;
-            Debug.Log("Reached");
+            //Debug.Log("Reached");
             respawn();
         }
         else
         {
             dead = true;
-            Debug.Log("Watered-ed");
+            //Debug.Log("Watered-ed");
             respawn();
         }
     }
@@ -88,11 +88,14 @@ public class Player : MonoBehaviour
     {
         if (val.x != 0) dir.x = val.x;
         else if (val.y != 0) dir.y = val.y;
+
+        transform.position = new Vector3(transform.position.x+dir.x, transform.position.y, transform.position.z + dir.y);
     }
     private void FixedUpdate()
     {
         //Debug.Log(dir);
-        rb.velocity = new Vector3(dir.x,0 , dir.y)*movespeed;
+        //rb.velocity = new Vector3(dir.x,0 , dir.y);
+        
     }
  
     public void respawn() 

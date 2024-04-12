@@ -12,17 +12,29 @@ public class Wood : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(GO, Lifetime);
+        //Destroy(GO, Lifetime);
         if (GO.tag == "Turtle")
         {
             StartCoroutine(OnOff());
         }    
     }
 
+    private void destroy()
+    {
+        Destroy(GO);
+    }
+
     private void FixedUpdate()
     {
         //thanks to the messed up rotations for the cars
         transform.Translate(new Vector3(-1, 0, 0) * movespeed * Time.fixedDeltaTime);
+        
+        if(GO.transform.position.x<-11 ||
+           GO.transform.position.x>11
+                                       )
+        {
+            destroy();
+        }
     }
     IEnumerator OnOff()
     {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Gamemanager : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] private Text Win;
     [SerializeField] private Text Lose;
     [SerializeField] private Text remainingLife;
+    [SerializeField] private GameObject btn;
     //Start game
     private void Start()
     {
@@ -20,6 +23,7 @@ public class Gamemanager : MonoBehaviour
     }
     private void StartGame()
     {
+        btn.SetActive ( false);
         Lose.enabled = false;
         Win.enabled = false;
         remainingLife.text = string.Format("{0} {1}", new string("X"), life.ToString());
@@ -56,6 +60,7 @@ public class Gamemanager : MonoBehaviour
             Debug.Log("LOST");
             Time.timeScale = 0;
             Lose.enabled = true;
+            btn.SetActive(true);
         }
     }
 
@@ -68,6 +73,7 @@ public class Gamemanager : MonoBehaviour
             Debug.Log("WIN");
             Time.timeScale = 0;
             Win.enabled = true;
+            btn.SetActive(true);
         }
     }
     
@@ -85,7 +91,14 @@ public class Gamemanager : MonoBehaviour
         else
             lose();
     }
-    
+
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+
+    }
+
     //if player dead respawn
     private void respawnPlayer() 
     {
